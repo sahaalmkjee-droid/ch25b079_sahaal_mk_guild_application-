@@ -6,27 +6,29 @@ SAHAAL / NEXUS is an autonomous full-stack career intelligence platform powering
 
 ## System Architecture
 
-\\mermaid
+Interactive Architecture Flowchart: [View System Architecture Diagram on Mermaid.ai](https://mermaid.ai/d/daf00f8c-c455-4a92-be8f-1630c85ce181)
+
+```mermaid
 flowchart TD
-    subgraph Frontend [Frontend SPA - React + Vite + Tailwind]
-        UI[User Dashboard UI]
-        RankPage[Ranked Matches & Resume Vectorizer]
-        BriefingPage[Executive Spoken Audio Player]
-        ChatPage[Career Copilot AI Agent]
+    subgraph Frontend ["Frontend SPA - React + Vite + Tailwind"]
+        UI["User Dashboard UI"]
+        RankPage["Ranked Matches and Resume Vectorizer"]
+        BriefingPage["Executive Spoken Audio Player"]
+        ChatPage["Career Copilot AI Agent"]
     end
 
-    subgraph Backend [Backend Engine - Python FastAPI]
-        API[FastAPI REST Routers]
-        AuthMod[JWT Authentication Engine]
-        VectorEngine[768-Dim Dense Vector Matcher]
-        BriefingMod[Executive Briefing Generator]
-        SchedulerMod[6-Hour Automated Scraper & Cron]
+    subgraph Backend ["Backend Engine - Python FastAPI"]
+        API["FastAPI REST Routers"]
+        AuthMod["JWT Authentication Engine"]
+        VectorEngine["768-Dim Dense Vector Matcher"]
+        BriefingMod["Executive Briefing Generator"]
+        SchedulerMod["6-Hour Automated Scraper and Cron"]
     end
 
-    subgraph DataAI [Data & External AI Services]
-        DB[(PostgreSQL + pgvector / SQLite)]
-        Gemini[Google Gemini text-embedding-004 & 3.6-Flash]
-        ElevenLabs[ElevenLabs Voice Synthesis Engine]
+    subgraph DataAI ["Data and External AI Services"]
+        DB[("PostgreSQL + pgvector / SQLite")]
+        Gemini["Google Gemini text-embedding-004 and 3.6-Flash"]
+        ElevenLabs["ElevenLabs Voice Synthesis Engine"]
     end
 
     UI --> API
@@ -38,7 +40,11 @@ flowchart TD
     VectorEngine --> DB
     BriefingMod --> ElevenLabs
     SchedulerMod --> DB
-\
+```
+
+> **Note on Video Generation vs Voice Model:**  
+> Since video generation API tokens ran out, avatar video generation was not used. High-quality voice synthesis (ElevenLabs voice model) was used instead for executive audio briefing delivery.
+
 ---
 
 ## Setup Steps
@@ -46,7 +52,7 @@ flowchart TD
 ### 1. Local Development Setup
 
 #### Backend (b_end)
-\\ash
+```bash
 # Navigate to backend directory
 cd b_end
 
@@ -59,11 +65,12 @@ pip install -r requirements.txt
 
 # Start backend server
 python start_server.py
-\Backend runs on: http://127.0.0.1:8000  
+```
+Backend runs on: http://127.0.0.1:8000  
 API Health Check: http://127.0.0.1:8000/health
 
 #### Frontend (f_end)
-\\ash
+```bash
 # Navigate to frontend directory
 cd f_end
 
@@ -72,7 +79,8 @@ npm install
 
 # Start Vite dev server
 npm run dev
-\Frontend runs on: http://localhost:5173
+```
+Frontend runs on: http://localhost:5173
 
 ---
 
@@ -118,7 +126,7 @@ To prevent duplicate job postings across automated 6-hour scrape cycles and manu
 While the core platform, vector engine, audio briefings, agent chatbot, and auth are fully functional, the following items remain open for future development:
 
 1. Real-Time WebSockets: Background jobs and briefings currently use structured short-polling (/jobs/status/{id}) rather than persistent WebSocket frames.
-2. WebRTC Talking Avatars: Executive briefings synthesize spoken MP3 audio; video avatar rendering currently outputs placeholder video cards.
+2. WebRTC Talking Avatars / Video Generation: Since video generation API tokens ran out, avatar video generation was replaced with a voice synthesis model (ElevenLabs spoken audio briefings).
 3. Production PostgreSQL Migration Scripts: Database table initialization uses SQLAlchemy create_all() with fallback rather than formal Alembic migration scripts.
 4. Multi-Tenant RBAC Permissions: Roles are currently divided between standard candidates and executive demo users without granular team workspace RBAC controls.
 

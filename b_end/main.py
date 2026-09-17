@@ -1,5 +1,4 @@
 import os
-import asyncio
 import datetime
 from dotenv import load_dotenv
 load_dotenv()
@@ -14,7 +13,6 @@ from audio_briefing import router as briefing_router, MEDIA_DIR
 from chatbot import router as chatbot_router
 from cost_analytics import router as analytics_router
 from jobs import router as jobs_router
-from scheduler import start_6h_cron_loop
 
 app = FastAPI(
     title="SAHAAL / NEXUS Career Intelligence API",
@@ -33,49 +31,36 @@ app.add_middleware(
 app.mount("/media", StaticFiles(directory=MEDIA_DIR), name="media")
 
 @app.on_event("startup")
-async def on_startup():
+def on_startup():
+    init_db()
+    db = SessionLocal()
     try:
-        init_db()
-        db = SessionLocal()
-        try:
-            # Seed demo executive account
-            exec_demo = db.query(User).filter(User.email == "demo.executive@nexus.ai").first()
-            if not exec_demo:
-                exec_user = User(
-                    email="demo.executive@nexus.ai",
-                    hashed_password=hash_password("nexus2026!")
-                )
-                db.add(exec_user)
-                db.commit()
-                print("[Auth] Seeded demo executive user: demo.executive@nexus.ai")
-            else:
-                exec_demo.hashed_password = hash_password("nexus2026!")
-                db.commit()
+        # Seed demo executive account
+        exec_demo = db.query(User).filter(User.email == "demo.executive@nexus.ai").first()
+        if not exec_demo:
+            exec_user = User(
+                email="demo.executive@nexus.ai",
+                hashed_password=hash_password("nexus2026!")
+            )
+            db.add(exec_user)
+            db.commit()
+            print("[Auth] Seeded demo executive user: demo.executive@nexus.ai")
+        else:
+            exec_demo.hashed_password = hash_password("nexus2026!")
+            db.commit()
 
-            # Seed standard demo account
-            demo = db.query(User).filter(User.email == "demo@nexus.ai").first()
-            if not demo:
-                demo_user = User(
-                    email="demo@nexus.ai",
-                    hashed_password=hash_password("password123")
-                )
-                db.add(demo_user)
-                db.commit()
-                print("[Auth] Seeded default demo user: demo@nexus.ai")
-
-            # Seed initial high-signal job opportunities
-            from jobs import seed_job_listings_if_empty
-            seed_job_listings_if_empty(db)
-        finally:
-            db.close()
-    except Exception as e:
-        print(f"[Startup Seeding Notice] {e}")
-
-    # Launch background 6-hour cron scheduler non-blockingly
-    try:
-        asyncio.create_task(start_6h_cron_loop())
-    except Exception as e:
-        print(f"[Cron Loop Notice] {e}")
+        # Seed standard demo account
+        demo = db.query(User).filter(User.email == "demo@nexus.ai").first()
+        if not demo:
+            demo_user = User(
+                email="demo@nexus.ai",
+                hashed_password=hash_password("password123")
+            )
+            db.add(demo_user)
+            db.commit()
+            print("[Auth] Seeded default demo user: demo@nexus.ai")
+    finally:
+        db.close()
 
 # ---------------------------------------------------------------------------
 # Health Check Endpoint
@@ -103,3 +88,7 @@ app.include_router(jobs_router)         # Async Job Lifecycle Manager (queued ->
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)
+
+
+
+
