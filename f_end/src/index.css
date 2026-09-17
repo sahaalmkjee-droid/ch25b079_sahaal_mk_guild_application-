@@ -1,0 +1,474 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(135deg, #f8ecea 0%, #ebf5f7 48%, #9db8f1 100%) fixed;
+  min-height: 100vh;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* ============================================================================
+   DEEP DARK MODE (DARK BLUES & BLACKS FOR ALL UI BOXES)
+   ============================================================================ */
+html.dark body {
+  background: linear-gradient(135deg, #05070e 0%, #090d16 45%, #0f172a 100%) fixed !important;
+  color: #f8fafc !important;
+}
+
+/* All Card Boxes & Containers */
+html.dark .bg-white {
+  background-color: #0f172a !important;
+  color: #f8fafc !important;
+  border-color: #1e293b !important;
+}
+
+html.dark .bg-white\/90,
+html.dark .bg-white\/80,
+html.dark .bg-white\/70,
+html.dark .bg-white\/60,
+html.dark .bg-white\/50 {
+  background-color: rgba(15, 23, 42, 0.92) !important;
+  border-color: rgba(30, 41, 59, 0.9) !important;
+}
+
+/* Sub-panels & Gray backgrounds */
+html.dark .bg-gray-50,
+html.dark .bg-gray-50\/80,
+html.dark .bg-gray-50\/70,
+html.dark .bg-gray-100,
+html.dark .bg-gray-100\/80,
+html.dark .bg-blue-50\/20 {
+  background-color: #0b1120 !important;
+  color: #e2e8f0 !important;
+}
+
+/* Ranked Matches Page Components */
+html.dark .ranked-resume-card {
+  background: linear-gradient(135deg, #0f172a 0%, #090d16 100%) !important;
+  border-color: #1e293b !important;
+  color: #f8fafc !important;
+}
+
+html.dark .ranked-icon-box {
+  background-color: #1e293b !important;
+  color: #38bdf8 !important;
+}
+
+html.dark .ranked-card-title {
+  color: #f8fafc !important;
+}
+
+html.dark .ranked-card-subtitle {
+  color: #94a3b8 !important;
+}
+
+html.dark .ranked-btn-secondary {
+  background-color: #1e293b !important;
+  border-color: #334155 !important;
+  color: #cbd5e1 !important;
+}
+
+html.dark .ranked-paste-box {
+  background-color: #0b1120 !important;
+  border-color: #1e293b !important;
+}
+
+html.dark .ranked-textarea {
+  background-color: #0f172a !important;
+  border-color: #334155 !important;
+  color: #f8fafc !important;
+}
+
+html.dark .semantic-search-container {
+  background: linear-gradient(135deg, #0b1120 0%, #1e1b4b 100%) !important;
+  border-color: #334155 !important;
+  color: #f8fafc !important;
+}
+
+html.dark .semantic-search-title {
+  color: #f8fafc !important;
+}
+
+html.dark .semantic-search-sub {
+  color: #94a3b8 !important;
+}
+
+html.dark .semantic-search-input {
+  background-color: #05070e !important;
+  border-color: #334155 !important;
+  color: #f8fafc !important;
+}
+
+/* Job Cards: Rich gradient of blackish-blue and blackish-red / magenta */
+html.dark .job-card-box {
+  background: linear-gradient(135deg, #090d16 0%, #0f172a 45%, #2a0b22 100%) !important;
+  border: 1px solid rgba(168, 85, 247, 0.3) !important;
+  color: #f8fafc !important;
+  box-shadow: 0 12px 30px -5px rgba(0, 0, 0, 0.7) !important;
+}
+
+html.dark .job-card-title {
+  color: #f8fafc !important;
+}
+
+html.dark .job-card-company {
+  color: #38bdf8 !important;
+}
+
+html.dark .job-card-meta {
+  color: #94a3b8 !important;
+}
+
+html.dark .job-card-justification {
+  background-color: rgba(15, 23, 42, 0.9) !important;
+  border: 1px solid rgba(168, 85, 247, 0.3) !important;
+}
+
+html.dark .job-card-justification-text {
+  color: #f1f5f9 !important;
+}
+
+html.dark .job-card-skill-badge {
+  background-color: #0b1120 !important;
+  border-color: #334155 !important;
+  color: #e2e8f0 !important;
+}
+
+html.dark .job-card-score-number {
+  color: #38bdf8 !important;
+}
+
+/* User Profile Dropdown Menu in Dark Mode */
+html.dark .profile-dropdown-trigger {
+  background-color: #0f172a !important;
+  border-color: #334155 !important;
+  color: #f8fafc !important;
+}
+
+html.dark .profile-dropdown-trigger span {
+  color: #f8fafc !important;
+}
+
+html.dark .profile-dropdown-popup {
+  background-color: #0f172a !important;
+  border-color: #1e293b !important;
+  color: #f8fafc !important;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.85) !important;
+}
+
+html.dark .profile-dropdown-header {
+  border-bottom-color: #1e293b !important;
+}
+
+html.dark .profile-dropdown-name {
+  color: #f8fafc !important;
+}
+
+html.dark .profile-dropdown-email {
+  color: #94a3b8 !important;
+}
+
+html.dark .profile-dropdown-btn {
+  background-color: #1e293b !important;
+  border-color: #334155 !important;
+  color: #38bdf8 !important;
+}
+
+html.dark .profile-dropdown-card {
+  background-color: #0b1120 !important;
+  border-color: #1e293b !important;
+  color: #f8fafc !important;
+}
+
+html.dark .profile-dropdown-card-title {
+  color: #f8fafc !important;
+}
+
+html.dark .profile-dropdown-subcard {
+  background-color: #0f172a !important;
+  border-color: #1e293b !important;
+  color: #f8fafc !important;
+}
+
+html.dark .profile-dropdown-subcard-label {
+  color: #94a3b8 !important;
+}
+
+html.dark .profile-dropdown-subcard-value {
+  color: #38bdf8 !important;
+}
+
+html.dark .profile-dropdown-logout {
+  background-color: #270f1a !important;
+  border: 1px solid #4c1d24 !important;
+  color: #f43f5e !important;
+}
+
+html.dark .profile-dropdown-link {
+  color: #94a3b8 !important;
+}
+
+/* Personal Details & Onboarding Pages in Dark Mode */
+html.dark .personal-details-root,
+html.dark .onboarding-page-root {
+  background: linear-gradient(135deg, #05070e 0%, #090d16 45%, #0f172a 100%) fixed !important;
+  color: #f8fafc !important;
+}
+
+html.dark .personal-details-card,
+html.dark .onboarding-card {
+  background-color: #0f172a !important;
+  border-color: #1e293b !important;
+  color: #f8fafc !important;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.75) !important;
+}
+
+html.dark .onboarding-tabs-bar {
+  background-color: #0b1120 !important;
+  border-color: #1e293b !important;
+}
+
+html.dark .onboarding-dropzone {
+  background-color: #0b1120 !important;
+  border-color: #334155 !important;
+  color: #f8fafc !important;
+}
+
+html.dark .onboarding-dropzone:hover {
+  background-color: #1e293b !important;
+  border-color: #3b82f6 !important;
+}
+
+html.dark .onboarding-dropzone div,
+html.dark .onboarding-dropzone span,
+html.dark .onboarding-dropzone strong {
+  color: #e2e8f0 !important;
+}
+
+/* Executive Briefing Dark Mode Outer & Card */
+html.dark .exec-briefing-outer {
+  background: linear-gradient(135deg, #030712 0%, #090d16 50%, #0f172a 100%) !important;
+}
+
+html.dark .exec-briefing-card {
+  background-color: rgba(15, 23, 42, 0.95) !important;
+  border-color: rgba(51, 65, 85, 0.8) !important;
+  color: #f8fafc !important;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.75) !important;
+}
+
+html.dark .exec-audio-deck {
+  background-color: #0b1120 !important;
+  border-color: #1e293b !important;
+  color: #f8fafc !important;
+}
+
+html.dark .exec-header-icon {
+  background-color: #1e293b !important;
+  color: #38bdf8 !important;
+}
+
+html.dark .exec-text-label {
+  color: #e2e8f0 !important;
+}
+
+html.dark .exec-action-btn {
+  background-color: #1e293b !important;
+  border-color: #334155 !important;
+  color: #e2e8f0 !important;
+}
+
+html.dark .exec-script-box {
+  background-color: #0f172a !important;
+  border-color: #334155 !important;
+  color: #e2e8f0 !important;
+}
+
+html.dark .exec-script-toggle {
+  color: #94a3b8 !important;
+}
+
+/* Agent Chat Components */
+html.dark .animated-chat-box {
+  background: linear-gradient(to bottom, #0f172a 0%, #090d16 100%) !important;
+  border-color: #1e293b !important;
+}
+
+html.dark .chat-greeting-sub {
+  color: #94a3b8 !important;
+}
+
+html.dark .quick-prompt-btn {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%) !important;
+  border-color: #334155 !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4) !important;
+}
+
+html.dark .quick-prompt-btn:hover {
+  background: linear-gradient(135deg, #1e293b 0%, #1e3a8a 100%) !important;
+  border-color: #3b82f6 !important;
+  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.3) !important;
+}
+
+html.dark .quick-prompt-btn .prompt-card-title {
+  color: #f8fafc !important;
+}
+
+html.dark .quick-prompt-btn:hover .prompt-card-title {
+  color: #38bdf8 !important;
+}
+
+html.dark .prompt-card-sub {
+  color: #94a3b8 !important;
+}
+
+html.dark .chat-input-form {
+  background-color: #0f172a !important;
+  border-color: #334155 !important;
+}
+
+html.dark .chat-input-form:hover,
+html.dark .chat-input-form:focus-within {
+  background-color: #1e293b !important;
+  border-color: #3b82f6 !important;
+  box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.3) !important;
+}
+
+html.dark .chat-bubble-agent {
+  color: #f8fafc !important;
+}
+
+html.dark .chat-markdown-body {
+  color: #f8fafc !important;
+}
+
+html.dark .chat-markdown-p,
+html.dark .chat-markdown-li,
+html.dark .chat-markdown-ul,
+html.dark .chat-markdown-ol {
+  color: #e2e8f0 !important;
+}
+
+html.dark .chat-markdown-strong,
+html.dark .chat-markdown-b {
+  color: #ffffff !important;
+}
+
+html.dark .chat-markdown-h1,
+html.dark .chat-markdown-h2,
+html.dark .chat-markdown-h3 {
+  color: #f8fafc !important;
+}
+
+html.dark .chat-markdown-table-wrap {
+  border-color: #334155 !important;
+}
+
+html.dark .chat-markdown-table {
+  background-color: #0b1120 !important;
+}
+
+html.dark .chat-markdown-thead {
+  background-color: #0f172a !important;
+  border-bottom-color: #334155 !important;
+}
+
+html.dark .chat-markdown-tr {
+  border-bottom-color: #1e293b !important;
+}
+
+html.dark .chat-markdown-th {
+  color: #38bdf8 !important;
+  border-right-color: #1e293b !important;
+}
+
+html.dark .chat-markdown-td {
+  color: #e2e8f0 !important;
+  border-right-color: #1e293b !important;
+}
+
+html.dark .chat-markdown-inline-code {
+  background-color: #1e293b !important;
+  color: #38bdf8 !important;
+}
+
+html.dark .chat-markdown-blockquote {
+  border-left-color: #38bdf8 !important;
+  color: #cbd5e1 !important;
+}
+
+html.dark .chat-input-field {
+  color: #f8fafc !important;
+}
+
+html.dark .chat-thinking-text {
+  color: #94a3b8 !important;
+}
+
+html.dark .chat-prompt-chip {
+  background-color: #1e293b !important;
+  color: #cbd5e1 !important;
+  border-color: #334155 !important;
+}
+
+html.dark .chat-prompt-chip:hover {
+  background-color: #334155 !important;
+  color: #f8fafc !important;
+}
+
+/* Text Overrides */
+html.dark h1, html.dark h2, html.dark h3, html.dark h4, html.dark h5, html.dark h6 {
+  color: #f8fafc !important;
+}
+
+html.dark .text-gray-900,
+html.dark .text-gray-800 {
+  color: #f8fafc !important;
+}
+
+html.dark .text-gray-700,
+html.dark .text-gray-600 {
+  color: #cbd5e1 !important;
+}
+
+html.dark .text-gray-500,
+html.dark .text-gray-400 {
+  color: #94a3b8 !important;
+}
+
+/* Inputs, Selects, Options */
+html.dark input,
+html.dark textarea,
+html.dark select {
+  background-color: #0b1120 !important;
+  color: #f8fafc !important;
+  border-color: #334155 !important;
+}
+
+html.dark option {
+  background-color: #0f172a !important;
+  color: #f8fafc !important;
+}
+
+/* Borders */
+html.dark .border-gray-200,
+html.dark .border-gray-200\/80,
+html.dark .border-gray-200\/60,
+html.dark .border-gray-100,
+html.dark .border-gray-300 {
+  border-color: #1e293b !important;
+}
+
+/* Hide scrollbar utility for clean navigation bar */
+.no-scrollbar::-webkit-scrollbar {
+  display: none !important;
+}
+.no-scrollbar {
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
+}

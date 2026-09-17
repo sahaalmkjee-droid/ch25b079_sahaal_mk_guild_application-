@@ -1,0 +1,24 @@
+# ─── Python ───────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg
+*.egg-info/
+dist/
+build/
+*.spec
+.venv/
+venv/
+env/
+.env
+
+# SQLite fallback DB (large — not needed on Render which uses Postgres)
+nexus_auth.db
+
+# Media / audio files generated at runtime
+media/
+
+# Logs
+*.log

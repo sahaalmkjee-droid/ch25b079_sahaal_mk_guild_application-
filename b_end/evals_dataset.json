@@ -1,0 +1,67 @@
+[
+  {
+    "id": 1,
+    "raw_text": "We are looking for a Senior AI & Machine Learning Engineer at DeepTech Labs located in London, UK (Hybrid). Must have strong expertise in Python, PyTorch, LLMs, Vector Databases, and FastAPI. Offered salary is £85,000 - £105,000 per annum. Experience: 5+ years.",
+    "ground_truth": {
+      "title": "Senior AI & Machine Learning Engineer",
+      "company": "DeepTech Labs",
+      "location": "London, UK",
+      "remote_ok": true,
+      "stipend": "£85,000 - £105,000 per annum",
+      "required_skills": ["Python", "PyTorch", "LLMs", "Vector Databases", "FastAPI"],
+      "experience_level": "Senior Level"
+    }
+  },
+  {
+    "id": 2,
+    "raw_text": "Full Stack Developer (React & Node.js) needed at FinTech Innovators in New York, NY (100% Remote). Requirements: React, TypeScript, Node.js, PostgreSQL, Tailwind CSS. Compensation: $120,000 - $140,000 / yr. Mid-level position.",
+    "ground_truth": {
+      "title": "Full Stack Developer (React & Node.js)",
+      "company": "FinTech Innovators",
+      "location": "New York, NY",
+      "remote_ok": true,
+      "stipend": "$120,000 - $140,000 / yr",
+      "required_skills": ["React", "TypeScript", "Node.js", "PostgreSQL", "Tailwind CSS"],
+      "experience_level": "Mid-Level"
+    }
+  },
+  {
+    "id": 3,
+    "raw_text": "Data Engineer Intern position at CloudScale Analytics in Bangalore, India (On-site). Core skills: SQL, Python, Apache Spark, Snowflake, Airflow. Stipend: ₹35,000 / month. Entry-level.",
+    "ground_truth": {
+      "title": "Data Engineer Intern",
+      "company": "CloudScale Analytics",
+      "location": "Bangalore, India",
+      "remote_ok": false,
+      "stipend": "₹35,000 / month",
+      "required_skills": ["SQL", "Python", "Apache Spark", "Snowflake", "Airflow"],
+      "experience_level": "Entry-Level"
+    }
+  },
+  {
+    "id": 4,
+    "raw_text": "DevOps / MLOps Lead required by Quantum Systems in Berlin, Germany. Responsibilities: Docker, Kubernetes, AWS, Terraform, CI/CD, MLflow. Salary: €90,000 / year. Senior level.",
+    "ground_truth": {
+      "title": "DevOps / MLOps Lead",
+      "company": "Quantum Systems",
+      "location": "Berlin, Germany",
+      "remote_ok": true,
+      "stipend": "€90,000 / year",
+      "required_skills": ["Docker", "Kubernetes", "AWS", "Terraform", "CI/CD", "MLflow"],
+      "experience_level": "Senior Level"
+    }
+  },
+  {
+    "id": 5,
+    "raw_text": "Backend Engineer (Go & Microservices) at CyberShield Security, San Francisco, CA. Required skills: Golang, gRPC, Redis, PostgreSQL, Kubernetes. Salary range: $150,000 - $180,000.",
+    "ground_truth": {
+      "title": "Backend Engineer (Go & Microservices)",
+      "company": "CyberShield Security",
+      "location": "San Francisco, CA",
+      "remote_ok": true,
+      "stipend": "$150,000 - $180,000",
+      "required_skills": ["Golang", "gRPC", "Redis", "PostgreSQL", "Kubernetes"],
+      "experience_level": "Mid-Level"
+    }
+  }
+]
