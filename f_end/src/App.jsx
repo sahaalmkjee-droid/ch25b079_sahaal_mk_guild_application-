@@ -22,7 +22,7 @@ import OnboardingResumePage from './pages/OnboardingResumePage';
 import PersonalDetailsPage from './pages/PersonalDetailsPage';
 import UserProfileDropdown from './components/UserProfileDropdown';
 
-const API_BASE = import.meta.env.VITE_API_BASE_URL || '';
+const API_BASE = (import.meta.env.VITE_API_BASE_URL || 'https://sahaal-backend-api.onrender.com').replace(/\/+$/, '');
 
 // ============================================================================
 // INSPECTABLE STYLES REGISTRY & PAGE BACKGROUND
