@@ -34,38 +34,44 @@ app.mount("/media", StaticFiles(directory=MEDIA_DIR), name="media")
 
 @app.on_event("startup")
 async def on_startup():
-    init_db()
-    db = SessionLocal()
     try:
-        # Seed demo executive account
-        exec_demo = db.query(User).filter(User.email == "demo.executive@nexus.ai").first()
-        if not exec_demo:
-            exec_user = User(
-                email="demo.executive@nexus.ai",
-                hashed_password=hash_password("nexus2026!")
-            )
-            db.add(exec_user)
-            db.commit()
-            print("[Auth] Seeded demo executive user: demo.executive@nexus.ai")
-        else:
-            exec_demo.hashed_password = hash_password("nexus2026!")
-            db.commit()
+        init_db()
+        db = SessionLocal()
+        try:
+            # Seed demo executive account
+            exec_demo = db.query(User).filter(User.email == "demo.executive@nexus.ai").first()
+            if not exec_demo:
+                exec_user = User(
+                    email="demo.executive@nexus.ai",
+                    hashed_password=hash_password("nexus2026!")
+                )
+                db.add(exec_user)
+                db.commit()
+                print("[Auth] Seeded demo executive user: demo.executive@nexus.ai")
+            else:
+                exec_demo.hashed_password = hash_password("nexus2026!")
+                db.commit()
 
-        # Seed standard demo account
-        demo = db.query(User).filter(User.email == "demo@nexus.ai").first()
-        if not demo:
-            demo_user = User(
-                email="demo@nexus.ai",
-                hashed_password=hash_password("password123")
-            )
-            db.add(demo_user)
-            db.commit()
-            print("[Auth] Seeded default demo user: demo@nexus.ai")
-    finally:
-        db.close()
+            # Seed standard demo account
+            demo = db.query(User).filter(User.email == "demo@nexus.ai").first()
+            if not demo:
+                demo_user = User(
+                    email="demo@nexus.ai",
+                    hashed_password=hash_password("password123")
+                )
+                db.add(demo_user)
+                db.commit()
+                print("[Auth] Seeded default demo user: demo@nexus.ai")
+        finally:
+            db.close()
+    except Exception as e:
+        print(f"[Startup Seeding Notice] {e}")
 
     # Launch background 6-hour cron scheduler non-blockingly
-    asyncio.create_task(start_6h_cron_loop())
+    try:
+        asyncio.create_task(start_6h_cron_loop())
+    except Exception as e:
+        print(f"[Cron Loop Notice] {e}")
 
 # ---------------------------------------------------------------------------
 # Health Check Endpoint

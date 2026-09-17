@@ -208,12 +208,21 @@ def init_db():
     try:
         Base.metadata.create_all(bind=engine)
         if IS_POSTGRES:
-            with engine.connect() as conn:
-                conn.execute(text("CREATE INDEX IF NOT EXISTS job_listings_embedding_hnsw_idx ON job_listings USING hnsw (embedding vector_cosine_ops);"))
-                conn.commit()
-            print("[Database] PostgreSQL tables and HNSW index ready.")
+            try:
+                with engine.connect() as conn:
+                    conn.execute(text("CREATE INDEX IF NOT EXISTS job_listings_embedding_hnsw_idx ON job_listings USING hnsw (embedding vector_cosine_ops);"))
+                    conn.commit()
+                print("[Database] PostgreSQL tables and HNSW index ready.")
+            except Exception as idx_err:
+                print(f"[Database] HNSW index notice: {idx_err}")
     except Exception as e:
-        print(f"[Database] Table creation notice: {e}")
+        print(f"[Database] Bulk table creation notice ({e}). Creating tables individually...")
+        for table in Base.metadata.sorted_tables:
+            try:
+                table.create(bind=engine, checkfirst=True)
+                print(f"[Database] Created table: {table.name}")
+            except Exception as t_err:
+                print(f"[Database] Table {table.name} notice: {t_err}")
 
 # ---------------------------------------------------------------------------
 # Asymmetric Document Embedding Helper (Directive 1 & 2)
