@@ -62,6 +62,10 @@ async def on_startup():
                 db.add(demo_user)
                 db.commit()
                 print("[Auth] Seeded default demo user: demo@nexus.ai")
+
+            # Seed initial high-signal job opportunities
+            from jobs import seed_job_listings_if_empty
+            seed_job_listings_if_empty(db)
         finally:
             db.close()
     except Exception as e:
