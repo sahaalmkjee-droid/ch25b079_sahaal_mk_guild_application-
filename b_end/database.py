@@ -15,25 +15,29 @@ if os.path.exists(ENV_FILE):
                 k, v = line.split("=", 1)
                 os.environ.setdefault(k.strip(), v.strip())
 
-DATABASE_URL = os.environ.get("DATABASE_URL", "postgresql://postgres:postgres@localhost:5432/nexus_db")
+DATABASE_URL = os.environ.get("DATABASE_URL") or os.environ.get("POSTGRES_URL") or os.environ.get("PGURL") or ""
 if DATABASE_URL.startswith("postgres://"):
     DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
 
 Base = declarative_base()
 
 IS_POSTGRES = False
-try:
-    test_engine = create_engine(DATABASE_URL, pool_pre_ping=True, connect_args={"connect_timeout": 10})
-    with test_engine.connect() as conn:
-        conn.execute(text("SELECT 1"))
-    engine = test_engine
-    IS_POSTGRES = True
-    print(f"[Database] Connected to PostgreSQL: {DATABASE_URL}")
-except Exception as e:
+if DATABASE_URL:
+    try:
+        test_engine = create_engine(DATABASE_URL, pool_pre_ping=True, connect_args={"connect_timeout": 10})
+        with test_engine.connect() as conn:
+            conn.execute(text("SELECT 1"))
+        engine = test_engine
+        IS_POSTGRES = True
+        print(f"[Database] Connected to PostgreSQL successfully.")
+    except Exception as e:
+        print(f"[Database] PostgreSQL connection failed ({e}). Fallback to SQLite.")
+        IS_POSTGRES = False
+
+if not IS_POSTGRES:
     fallback_path = os.path.join(BASE_DIR, "nexus_auth.db")
     engine = create_engine(f"sqlite:///{fallback_path}", connect_args={"check_same_thread": False})
-    IS_POSTGRES = False
-    print(f"[Database] PostgreSQL unavailable ({e}). Fallback to SQLite: {fallback_path}")
+    print(f"[Database] Using SQLite fallback: {fallback_path}")
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
