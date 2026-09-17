@@ -1,6 +1,6 @@
-# SAHAAL / NEXUS � Autonomous Career Intelligence Platform
+# SAHAAL / NEXUS — Autonomous Career Intelligence Platform
 
-[![Build & Deployment](https://img.shields.io/badge/Deployment-Render%20%7C%20Railway-success)](https://sahaal-frontend-production.up.railway.app)
+[![Deployment](https://img.shields.io/badge/Deployment-Render%20%7C%20Railway-success)](https://sahaal-frontend-production.up.railway.app)
 [![Python](https://img.shields.io/badge/Backend-FastAPI%203.11-blue)](https://sahaal-backend-api.onrender.com)
 [![Frontend](https://img.shields.io/badge/Frontend-React%20%2B%20Vite-cyan)](https://sahaal-frontend-production.up.railway.app)
 [![Database](https://img.shields.io/badge/Vector%20DB-PostgreSQL%20%2B%20pgvector-indigo)](https://sahaal-backend-api.onrender.com)
@@ -9,29 +9,29 @@
 
 ---
 
-## ??? System Architecture
+## 🏛️ System Architecture
 
-`mermaid
+\\mermaid
 flowchart TD
-    subgraph Frontend ["Frontend SPA (React + Vite + Tailwind)"]
-        UI["User Dashboard UI"]
-        RankPage["Ranked Matches & Resume Vectorizer"]
-        BriefingPage["Executive Spoken Audio Player"]
-        ChatPage["Career Copilot AI Agent"]
+    subgraph Frontend [Frontend SPA - React + Vite + Tailwind]
+        UI[User Dashboard UI]
+        RankPage[Ranked Matches & Resume Vectorizer]
+        BriefingPage[Executive Spoken Audio Player]
+        ChatPage[Career Copilot AI Agent]
     end
 
-    subgraph Backend ["Backend Engine (Python FastAPI)"]
-        API["FastAPI REST Routers"]
-        AuthMod["JWT Authentication Engine"]
-        VectorEngine["768-Dim Dense Vector Matcher"]
-        BriefingMod["Executive Briefing Generator"]
-        SchedulerMod["6-Hour Automated Scraper & Cron"]
+    subgraph Backend [Backend Engine - Python FastAPI]
+        API[FastAPI REST Routers]
+        AuthMod[JWT Authentication Engine]
+        VectorEngine[768-Dim Dense Vector Matcher]
+        BriefingMod[Executive Briefing Generator]
+        SchedulerMod[6-Hour Automated Scraper & Cron]
     end
 
-    subgraph DataAI ["Data & External AI Services"]
+    subgraph DataAI [Data & External AI Services]
         DB[(PostgreSQL + pgvector / SQLite)]
-        Gemini["Google Gemini text-embedding-004 & 3.6-Flash"]
-        ElevenLabs["ElevenLabs Voice Synthesis Engine"]
+        Gemini[Google Gemini text-embedding-004 & 3.6-Flash]
+        ElevenLabs[ElevenLabs Voice Synthesis Engine]
     end
 
     UI --> API
@@ -43,16 +43,15 @@ flowchart TD
     VectorEngine --> DB
     BriefingMod --> ElevenLabs
     SchedulerMod --> DB
-`
-
+\
 ---
 
-## ?? Setup Steps
+## 🚀 Setup Steps
 
 ### 1. Local Development Setup
 
 #### Backend (_end)
-`ash
+\\ash
 # Navigate to backend directory
 cd b_end
 
@@ -65,12 +64,11 @@ pip install -r requirements.txt
 
 # Start backend server
 python start_server.py
-`
-*Backend runs on:* http://127.0.0.1:8000  
+\*Backend runs on:* http://127.0.0.1:8000  
 *API Health Check:* http://127.0.0.1:8000/health
 
 #### Frontend (_end)
-`ash
+\\ash
 # Navigate to frontend directory
 cd f_end
 
@@ -79,8 +77,7 @@ npm install
 
 # Start Vite dev server
 npm run dev
-`
-*Frontend runs on:* http://localhost:5173
+\*Frontend runs on:* http://localhost:5173
 
 ---
 
@@ -91,7 +88,7 @@ npm run dev
 
 ---
 
-## ?? Required Environment Variables
+## 🔑 Required Environment Variables
 
 | Variable Name | Required By | Description | Example / Default |
 | :--- | :--- | :--- | :--- |
@@ -107,25 +104,25 @@ exus_jwt_secret_key_2026 |
 
 ---
 
-## ?? Deduplication Strategy
+## 🔄 Deduplication Strategy
 
 To prevent duplicate job postings across automated 6-hour scrape cycles and manual scraping requests, SAHAAL employs a **3-Tier Deduplication Strategy**:
 
-1. **SHA-256 Raw Payload Hashing (aw_hash):**
-   `python
-   raw_hash = hashlib.sha256(f"{title}{company}".encode("utf-8")).hexdigest()[:16]
-   `
-   Before inserting any scraped listing, a unique 16-character SHA-256 content hash is computed from normalized title and company name strings.
+1. **SHA-256 Raw Payload Hashing (
+aw_hash):**
+   \\python
+   raw_hash = hashlib.sha256(f'{title}{company}'.encode('utf-8')).hexdigest()[:16]
+   \   Before inserting any scraped listing, a unique 16-character SHA-256 content hash is computed from normalized title and company name strings.
 
 2. **Unique Source URL Database Constraints:**
    The job_listings table enforces a database-level UNIQUE index on source_url. Attempting to re-insert an existing URL triggers an in-memory skip or update pass.
 
 3. **Cosine Distance Near-Duplicate Filter:**
-   When vector embeddings are indexed, listings with a cosine distance  < 0.02$ against existing embeddings are flagged as version updates (has_changed = True) rather than creating duplicate database rows.
+   When vector embeddings are indexed, listings with a cosine distance D_c < 0.02 against existing embeddings are flagged as version updates (has_changed = True) rather than creating duplicate database rows.
 
 ---
 
-## ?? Honest List of Unfinished Features
+## 📋 Honest List of Unfinished Features
 
 While the core platform, vector engine, audio briefings, agent chatbot, and auth are fully functional, the following items remain open for future development:
 
@@ -136,4 +133,4 @@ While the core platform, vector engine, audio briefings, agent chatbot, and auth
 
 ---
 
-*Submitted for evaluation � SAHAAL Guild Application Project 2026.*
+*Submitted for evaluation — SAHAAL Guild Application Project 2026.*
